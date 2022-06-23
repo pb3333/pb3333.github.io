@@ -1,4 +1,0 @@
-text3
-
-this text added in branch text
-"Hello"
