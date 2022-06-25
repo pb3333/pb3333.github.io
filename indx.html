@@ -31,14 +31,16 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
     <h1>My page on GitHub</h1>
     <p>My text</p>
   </div>
+ 
+<div id="root" class="container border mt-1 d-flex justify-content-center">
+  <div class="spinner-border text-muted"></div>
+</div>
 
 <!--  <div id="root" class="container border mt-1">Loading ...</div>-->
 <!--  <div id="circle"></div>  -->
 
-  <div id="circle"></div>
-  <div id="root" class="container border mt-1">
-    
-  </div>
+<!--  <div id="circle"></div>-->
+<!--  <div id="root" class="container border mt-1"></div>-->
  
 
 
@@ -77,14 +79,54 @@ html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
 <script  type="text/babel">
 const {useState, useEffect} = React;
 
+const InfoSpan = (props) => {
+  return <span className={"text-white"}>{props.data}</span>
+}
+
+
 const Comp = (props) => {
   
   const [name, setName] = useState("Baddy");
+  const [count, setCount] = useState(0);
+  const [plus, setPlus] = useState(0);
+  const [minus, setMinus] = useState(0);
+  const [reset, setReset] = useState(0);
   
+  const inc = () => {
+   setCount(count + 1);   
+   setPlus(plus + 1); 
+  }
+  
+  const dec = () => {
+   setCount(count - 1);   
+   setMinus(minus + 1); 
+  }
+  
+  const res = () => {
+    setReset(reset + 1);
+    setCount(0);
+  }
+
   return (
 
    <div>
-     <p>Hello {name}</p>
+     <p className={"bg-light text-success d-flex justify-content-center  shadow mt-2 p-2"}>Count: {count}</p>
+
+     <div style={{width:"500px", height:"100px"}}  className={"d-flex justify-content-center align-items-start border border-2 bg-light "}>
+       <button onClick={inc} className={"btn btn-info btn-lg me-2 shadow mt-2"}>&#10133;
+          ({<InfoSpan data={plus} />})
+       </button>
+
+       <button onClick={dec} className={"btn btn-info btn-lg me-2 shadow mt-2"}>&#10134;
+          ({<InfoSpan data={minus} />})
+       </button>
+
+       <button onClick={res} className={"btn btn-warning btn-lg shadow mt-2 text-danger"}>Reset
+	 ({<InfoSpan data={reset} />})
+       </button>
+
+     </div>
+
    </div>
 
   )
@@ -93,10 +135,10 @@ const Comp = (props) => {
 
 function App() {
 
-  useEffect(() => {
-    document.getElementById("circle").style.display = "none"; 
-  }, []
-);
+//  useEffect(() => {
+//    document.getElementById("circle").style.display = "none"; 
+//  }, []
+//);
 
 
   return <Comp />
